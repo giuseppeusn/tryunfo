@@ -30,11 +30,54 @@ class App extends React.Component {
     const valueState = type === 'checkbox' ? checked : value;
     this.setState({
       [name]: valueState,
+    }, () => {
+      this.verifyButton();
     });
   }
 
   onSaveButtonClick(event) {
     event.preventDefault();
+  }
+
+  verifyButton() {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    } = this.state;
+
+    const attr1 = Number(cardAttr1);
+    const attr2 = Number(cardAttr2);
+    const attr3 = Number(cardAttr3);
+
+    const max = 90;
+    const totalMax = 210;
+
+    if (
+      cardName.length > 0
+      && cardDescription.length > 0
+      && cardImage.length > 0
+      && cardRare.length > 0
+      && attr1 >= 0
+      && attr1 <= max
+      && attr2 >= 0
+      && attr2 <= max
+      && attr3 >= 0
+      && attr3 <= max
+      && (attr1 + attr2 + attr3) <= totalMax
+    ) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
+      });
+    }
   }
 
   render() {

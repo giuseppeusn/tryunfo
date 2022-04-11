@@ -103,7 +103,7 @@ class Form extends Component {
         {isSaveButtonDisabled ? (
           <button
             type="submit"
-            data-testid="save-buttons"
+            data-testid="save-button"
             value={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
             disabled
@@ -113,7 +113,7 @@ class Form extends Component {
         ) : (
           <button
             type="submit"
-            data-testid="save-buttons"
+            data-testid="save-button"
             value={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
           >
