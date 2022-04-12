@@ -1,0 +1,11 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  height: 300px;
+  width: 200px;
+}
+
+.super-trunfo {
+  width: 50px;
+}

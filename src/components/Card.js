@@ -13,17 +13,14 @@ class Card extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      isList,
+      removeCard,
     } = this.props;
 
     return (
-      <div>
+      <div className="card">
         <p data-testid="name-card">{cardName}</p>
         <img src={ cardImage } alt={ cardName } data-testid="image-card" />
-        <p data-testid="description-card">{cardDescription}</p>
-        <p data-testid="attr1-card">{cardAttr1}</p>
-        <p data-testid="attr2-card">{cardAttr2}</p>
-        <p data-testid="attr3-card">{cardAttr3}</p>
-        <p data-testid="rare-card">{cardRare}</p>
         {cardTrunfo && (
           <img
             src={ superTrunfo }
@@ -31,6 +28,21 @@ class Card extends Component {
             data-testid="trunfo-card"
             className="super-trunfo"
           />
+        )}
+        <p data-testid="description-card">{cardDescription}</p>
+        <p data-testid="attr1-card">{cardAttr1}</p>
+        <p data-testid="attr2-card">{cardAttr2}</p>
+        <p data-testid="attr3-card">{cardAttr3}</p>
+        <p data-testid="rare-card">{cardRare}</p>
+        {isList && (
+          <button
+            type="button"
+            data-testid="delete-button"
+            onClick={ removeCard }
+            id={ cardName }
+          >
+            X
+          </button>
         )}
       </div>
     );
@@ -46,6 +58,12 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  isList: PropTypes.bool.isRequired,
+  removeCard: PropTypes.func,
+};
+
+Card.defaultProps = {
+  removeCard: () => {},
 };
 
 export default Card;

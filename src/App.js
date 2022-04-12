@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import './components/Card.css';
 
 class App extends React.Component {
   constructor() {
@@ -17,13 +18,12 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
-      // onInputChange: '',
-      // onSaveButtonClick: '',
       saveCards: [],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.removeCard = this.removeCard.bind(this);
   }
 
   onInputChange({ target }) {
@@ -71,6 +71,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
+      cardTrunfo: false,
       hasTrunfo: cardTrunfo,
       isSaveButtonDisabled: true,
       saveCards,
@@ -122,6 +123,19 @@ class App extends React.Component {
     }
   }
 
+  removeCard({ target }) {
+    const { saveCards } = this.state;
+    const cardTrunfo = saveCards.find((item) => (
+      item.saveCardName === target.id
+    )).saveCardTrunfo;
+    const newSaveCards = saveCards.filter((item) => item.saveCardName !== target.id);
+
+    this.setState({
+      saveCards: newSaveCards,
+      hasTrunfo: !cardTrunfo,
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -135,8 +149,6 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       saveCards,
-      // onInputChange,
-      // onSaveButtonClick,
     } = this.state;
 
     return (
@@ -165,6 +177,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          isList={ false }
         />
         {saveCards.length > 0
           && saveCards.map((item) => {
@@ -189,6 +202,8 @@ class App extends React.Component {
                 cardImage={ saveCardImage }
                 cardRare={ saveCardRare }
                 cardTrunfo={ saveCardTrunfo }
+                isList
+                removeCard={ this.removeCard }
               />
             );
           })}
