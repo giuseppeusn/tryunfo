@@ -22,12 +22,14 @@ class Card extends Component {
         <p data-testid="name-card">{cardName}</p>
         <img src={ cardImage } alt={ cardName } data-testid="image-card" />
         {cardTrunfo && (
-          <img
-            src={ superTrunfo }
-            alt="Super Trunfo"
-            data-testid="trunfo-card"
-            className="super-trunfo"
-          />
+          <div data-testid="trunfo-card">
+            <p>Super Trunfo</p>
+            <img
+              src={ superTrunfo }
+              alt="Super Trunfo"
+              className="super-trunfo"
+            />
+          </div>
         )}
         <p data-testid="description-card">{cardDescription}</p>
         <p data-testid="attr1-card">{cardAttr1}</p>
@@ -58,11 +60,12 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  isList: PropTypes.bool.isRequired,
+  isList: PropTypes.bool,
   removeCard: PropTypes.func,
 };
 
 Card.defaultProps = {
+  isList: true,
   removeCard: () => {},
 };
 

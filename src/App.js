@@ -24,6 +24,7 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.removeCard = this.removeCard.bind(this);
+    this.searchCard = this.searchCard.bind(this);
   }
 
   onInputChange({ target }) {
@@ -47,6 +48,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
       saveCards,
     } = this.state;
 
@@ -72,7 +74,7 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
-      hasTrunfo: cardTrunfo,
+      hasTrunfo: hasTrunfo === false ? cardTrunfo : true,
       isSaveButtonDisabled: true,
       saveCards,
     });
@@ -133,6 +135,15 @@ class App extends React.Component {
     this.setState({
       saveCards: newSaveCards,
       hasTrunfo: !cardTrunfo,
+    });
+  }
+
+  searchCard({ target }) {
+    const { saveCards } = this.state;
+    const search = saveCards.filter((item) => item.saveCardName.includes(target.value));
+
+    this.setState({
+      saveCards: search,
     });
   }
 
@@ -202,11 +213,18 @@ class App extends React.Component {
                 cardImage={ saveCardImage }
                 cardRare={ saveCardRare }
                 cardTrunfo={ saveCardTrunfo }
-                isList
                 removeCard={ this.removeCard }
               />
             );
           })}
+        <div>
+          <input
+            type="text"
+            onChange={ this.searchCard }
+            placeholder="Nome da carta"
+            data-testid="name-filter"
+          />
+        </div>
       </div>
     );
   }
