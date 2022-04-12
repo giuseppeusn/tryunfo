@@ -13,12 +13,13 @@ class App extends React.Component {
       cardAttr2: '',
       cardAttr3: '',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
       cardTrunfo: false,
       // hasTrunfo: false,
       isSaveButtonDisabled: true,
       // onInputChange: '',
       // onSaveButtonClick: '',
+      saveCards: [],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -37,6 +38,43 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      saveCards,
+    } = this.state;
+
+    const newCard = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+
+    saveCards.push(newCard);
+
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+      saveCards,
+    });
   }
 
   verifyButton() {
@@ -57,19 +95,23 @@ class App extends React.Component {
     const max = 90;
     const totalMax = 210;
 
-    if (
-      cardName.length > 0
-      && cardDescription.length > 0
-      && cardImage.length > 0
-      && cardRare.length > 0
-      && attr1 >= 0
-      && attr1 <= max
-      && attr2 >= 0
-      && attr2 <= max
-      && attr3 >= 0
-      && attr3 <= max
-      && (attr1 + attr2 + attr3) <= totalMax
-    ) {
+    const error = [
+      cardName.length > 0,
+      cardDescription.length > 0,
+      cardImage.length > 0,
+      cardRare.length > 0,
+      attr1 >= 0,
+      attr1 <= max,
+      attr2 >= 0,
+      attr2 <= max,
+      attr3 >= 0,
+      attr3 <= max,
+      (attr1 + attr2 + attr3) <= totalMax,
+    ];
+
+    const disabled = error.every((item) => item === true);
+
+    if (disabled) {
       this.setState({
         isSaveButtonDisabled: false,
       });
