@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import superTrunfo from '../images/super_trunfo.png';
 
 class Card extends Component {
   render() {
@@ -12,7 +13,6 @@ class Card extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
     } = this.props;
 
     return (
@@ -24,7 +24,14 @@ class Card extends Component {
         <p data-testid="attr2-card">{cardAttr2}</p>
         <p data-testid="attr3-card">{cardAttr3}</p>
         <p data-testid="rare-card">{cardRare}</p>
-        { cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
+        {cardTrunfo && (
+          <img
+            src={ superTrunfo }
+            alt="Super Trunfo"
+            data-testid="trunfo-card"
+            className="super-trunfo"
+          />
+        )}
       </div>
     );
   }

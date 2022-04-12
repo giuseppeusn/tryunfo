@@ -47,20 +47,18 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
       saveCards,
     } = this.state;
 
     const newCard = {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      hasTrunfo,
+      saveCardName: cardName,
+      saveCardDescription: cardDescription,
+      saveCardAttr1: cardAttr1,
+      saveCardAttr2: cardAttr2,
+      saveCardAttr3: cardAttr3,
+      saveCardImage: cardImage,
+      saveCardRare: cardRare,
+      saveCardTrunfo: cardTrunfo,
     };
 
     saveCards.push(newCard);
@@ -73,8 +71,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardImage: '',
       cardRare: 'normal',
-      cardTrunfo: false,
-      hasTrunfo: true,
+      hasTrunfo: cardTrunfo,
       isSaveButtonDisabled: true,
       saveCards,
     });
@@ -137,6 +134,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      saveCards,
       // onInputChange,
       // onSaveButtonClick,
     } = this.state;
@@ -167,8 +165,33 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
         />
+        {saveCards.length > 0
+          && saveCards.map((item) => {
+            const {
+              saveCardName,
+              saveCardDescription,
+              saveCardAttr1,
+              saveCardAttr2,
+              saveCardAttr3,
+              saveCardImage,
+              saveCardRare,
+              saveCardTrunfo,
+            } = item;
+            return (
+              <Card
+                key={ saveCardName }
+                cardName={ saveCardName }
+                cardDescription={ saveCardDescription }
+                cardAttr1={ saveCardAttr1 }
+                cardAttr2={ saveCardAttr2 }
+                cardAttr3={ saveCardAttr3 }
+                cardImage={ saveCardImage }
+                cardRare={ saveCardRare }
+                cardTrunfo={ saveCardTrunfo }
+              />
+            );
+          })}
       </div>
     );
   }
