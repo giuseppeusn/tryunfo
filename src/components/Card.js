@@ -18,24 +18,26 @@ class Card extends Component {
     } = this.props;
 
     return (
-      <div className="card">
-        <p data-testid="name-card">{cardName}</p>
-        <img src={ cardImage } alt={ cardName } data-testid="image-card" />
-        {cardTrunfo && (
-          <div data-testid="trunfo-card">
-            <p>Super Trunfo</p>
-            <img
-              src={ superTrunfo }
-              alt="Super Trunfo"
-              className="super-trunfo"
-            />
-          </div>
-        )}
-        <p data-testid="description-card">{cardDescription}</p>
-        <p data-testid="attr1-card">{cardAttr1}</p>
-        <p data-testid="attr2-card">{cardAttr2}</p>
-        <p data-testid="attr3-card">{cardAttr3}</p>
-        <p data-testid="rare-card">{cardRare}</p>
+      <div className="card-container">
+        <div className="card">
+          <p data-testid="name-card">{cardName}</p>
+          <img src={ cardImage } alt={ cardName } data-testid="image-card" />
+          {cardTrunfo && (
+            <div data-testid="trunfo-card">
+              <p>Super Trunfo</p>
+              <img
+                src={ superTrunfo }
+                alt="Super Trunfo"
+                className="super-trunfo"
+              />
+            </div>
+          )}
+          <p data-testid="description-card">{cardDescription}</p>
+          <p data-testid="attr1-card">{cardAttr1}</p>
+          <p data-testid="attr2-card">{cardAttr2}</p>
+          <p data-testid="attr3-card">{cardAttr3}</p>
+          <p data-testid="rare-card">{cardRare}</p>
+        </div>
         {isList && (
           <button
             type="button"

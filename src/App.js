@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
 import './components/Card.css';
+import Filter from './components/Filter';
 
 class App extends React.Component {
   constructor() {
@@ -19,12 +20,14 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       saveCards: [],
+      search: [],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.removeCard = this.removeCard.bind(this);
     this.searchCard = this.searchCard.bind(this);
+    this.filterRare = this.filterRare.bind(this);
   }
 
   onInputChange({ target }) {
@@ -77,6 +80,7 @@ class App extends React.Component {
       hasTrunfo: hasTrunfo === false ? cardTrunfo : true,
       isSaveButtonDisabled: true,
       saveCards,
+      search: saveCards,
     });
   }
 
@@ -135,15 +139,27 @@ class App extends React.Component {
     this.setState({
       saveCards: newSaveCards,
       hasTrunfo: !cardTrunfo,
+      search: newSaveCards,
     });
   }
 
   searchCard({ target }) {
     const { saveCards } = this.state;
-    const search = saveCards.filter((item) => item.saveCardName.includes(target.value));
+    const search = target.value.length > 0
+      ? saveCards.filter((item) => item.saveCardName.includes(target.value)) : saveCards;
 
     this.setState({
-      saveCards: search,
+      search,
+    });
+  }
+
+  filterRare({ target }) {
+    const { saveCards } = this.state;
+    const search = target.value !== 'todas'
+      ? saveCards.filter((item) => item.saveCardRare === target.value) : saveCards;
+
+    this.setState({
+      search,
     });
   }
 
@@ -160,10 +176,11 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       saveCards,
+      search,
     } = this.state;
 
     return (
-      <div>
+      <div className="container">
         <h1>Tryunfo</h1>
         <Form
           cardName={ cardName }
@@ -190,41 +207,36 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           isList={ false }
         />
-        {saveCards.length > 0
-          && saveCards.map((item) => {
-            const {
-              saveCardName,
-              saveCardDescription,
-              saveCardAttr1,
-              saveCardAttr2,
-              saveCardAttr3,
-              saveCardImage,
-              saveCardRare,
-              saveCardTrunfo,
-            } = item;
-            return (
-              <Card
-                key={ saveCardName }
-                cardName={ saveCardName }
-                cardDescription={ saveCardDescription }
-                cardAttr1={ saveCardAttr1 }
-                cardAttr2={ saveCardAttr2 }
-                cardAttr3={ saveCardAttr3 }
-                cardImage={ saveCardImage }
-                cardRare={ saveCardRare }
-                cardTrunfo={ saveCardTrunfo }
-                removeCard={ this.removeCard }
-              />
-            );
-          })}
-        <div>
-          <input
-            type="text"
-            onChange={ this.searchCard }
-            placeholder="Nome da carta"
-            data-testid="name-filter"
-          />
+        <div className="cards-display">
+          {saveCards.length > 0
+            && search.map((item) => {
+              const {
+                saveCardName,
+                saveCardDescription,
+                saveCardAttr1,
+                saveCardAttr2,
+                saveCardAttr3,
+                saveCardImage,
+                saveCardRare,
+                saveCardTrunfo,
+              } = item;
+              return (
+                <Card
+                  key={ saveCardName }
+                  cardName={ saveCardName }
+                  cardDescription={ saveCardDescription }
+                  cardAttr1={ saveCardAttr1 }
+                  cardAttr2={ saveCardAttr2 }
+                  cardAttr3={ saveCardAttr3 }
+                  cardImage={ saveCardImage }
+                  cardRare={ saveCardRare }
+                  cardTrunfo={ saveCardTrunfo }
+                  removeCard={ this.removeCard }
+                />
+              );
+            })}
         </div>
+        <Filter search={ this.searchCard } filter={ this.filterRare } />
       </div>
     );
   }
