@@ -21,16 +21,11 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       saveCards: [],
       search: [],
+      check: false,
     };
-
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-    this.removeCard = this.removeCard.bind(this);
-    this.searchCard = this.searchCard.bind(this);
-    this.filterRare = this.filterRare.bind(this);
   }
 
-  onInputChange({ target }) {
+  onInputChange = ({ target }) => {
     const { name, type, value, checked } = target;
     const valueState = type === 'checkbox' ? checked : value;
     this.setState({
@@ -40,7 +35,7 @@ class App extends React.Component {
     });
   }
 
-  onSaveButtonClick(event) {
+  onSaveButtonClick = (event) => {
     event.preventDefault();
     const {
       cardName,
@@ -84,52 +79,13 @@ class App extends React.Component {
     });
   }
 
-  verifyButton() {
-    const {
-      cardName,
-      cardDescription,
-      cardImage,
-      cardRare,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-    } = this.state;
-
-    const attr1 = Number(cardAttr1);
-    const attr2 = Number(cardAttr2);
-    const attr3 = Number(cardAttr3);
-
-    const max = 90;
-    const totalMax = 210;
-
-    const error = [
-      cardName.length > 0,
-      cardDescription.length > 0,
-      cardImage.length > 0,
-      cardRare.length > 0,
-      attr1 >= 0,
-      attr1 <= max,
-      attr2 >= 0,
-      attr2 <= max,
-      attr3 >= 0,
-      attr3 <= max,
-      (attr1 + attr2 + attr3) <= totalMax,
-    ];
-
-    const disabled = error.every((item) => item === true);
-
-    if (disabled) {
-      this.setState({
-        isSaveButtonDisabled: false,
-      });
-    } else {
-      this.setState({
-        isSaveButtonDisabled: true,
-      });
-    }
+  setSearch(search) {
+    this.setState({
+      search,
+    });
   }
 
-  removeCard({ target }) {
+  removeCard = ({ target }) => {
     const { saveCards } = this.state;
     const cardTrunfo = saveCards.find((item) => (
       item.saveCardName === target.id
@@ -143,24 +99,65 @@ class App extends React.Component {
     });
   }
 
-  searchCard({ target }) {
+  searchCard = ({ target }) => {
     const { saveCards } = this.state;
     const search = target.value.length > 0
       ? saveCards.filter((item) => item.saveCardName.includes(target.value)) : saveCards;
 
-    this.setState({
-      search,
-    });
+    this.setSearch(search);
   }
 
-  filterRare({ target }) {
+  filterRare = ({ target }) => {
     const { saveCards } = this.state;
     const search = target.value !== 'todas'
       ? saveCards.filter((item) => item.saveCardRare === target.value) : saveCards;
 
+    this.setSearch(search);
+  }
+
+  checkTrunfo = ({ target }) => {
+    const { saveCards } = this.state;
+    const search = target.checked === true
+      ? saveCards.filter((item) => item.saveCardTrunfo === true) : saveCards;
+
     this.setState({
       search,
+      check: target.checked,
     });
+  }
+
+  verifyButton() {
+    const { cardName, cardDescription, cardImage, cardRare, cardAttr1, cardAttr2,
+      cardAttr3 } = this.state;
+
+    const max = 90;
+    const totalMax = 210;
+
+    const error = [
+      cardName.length > 0,
+      cardDescription.length > 0,
+      cardImage.length > 0,
+      cardRare.length > 0,
+      Number(cardAttr1) >= 0,
+      Number(cardAttr1) <= max,
+      Number(cardAttr2) >= 0,
+      Number(cardAttr2) <= max,
+      Number(cardAttr3) >= 0,
+      Number(cardAttr3) <= max,
+      (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr2)) <= totalMax,
+    ];
+
+    const disabled = error.every((item) => item === true);
+
+    if (disabled) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
+      });
+    }
   }
 
   render() {
@@ -177,6 +174,7 @@ class App extends React.Component {
       isSaveButtonDisabled,
       saveCards,
       search,
+      check,
     } = this.state;
 
     return (
@@ -236,7 +234,12 @@ class App extends React.Component {
               );
             })}
         </div>
-        <Filter search={ this.searchCard } filter={ this.filterRare } />
+        <Filter
+          search={ this.searchCard }
+          filter={ this.filterRare }
+          trunfo={ this.checkTrunfo }
+          check={ check }
+        />
       </div>
     );
   }
