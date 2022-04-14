@@ -39,9 +39,9 @@ class Filter extends Component {
             </select>
           </label>
         ) : (
-          <label htmlFor="rare">
+          <label htmlFor="rare-filter">
             Raridade
-            <select id="rare" onChange={ filter } data-testid="rare-filter">
+            <select id="rare-filter" onChange={ filter } data-testid="rare-filter">
               <option>todas</option>
               <option>normal</option>
               <option>raro</option>
@@ -50,11 +50,11 @@ class Filter extends Component {
           </label>
         )}
 
-        <label htmlFor="trunfo">
+        <label htmlFor="trunfo-check">
           Super Trunfo
           <input
             type="checkbox"
-            id="trunfo"
+            id="trunfo-check"
             data-testid="trunfo-filter"
             onChange={ trunfo }
           />

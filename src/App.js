@@ -79,12 +79,6 @@ class App extends React.Component {
     });
   }
 
-  setSearch(search) {
-    this.setState({
-      search,
-    });
-  }
-
   removeCard = ({ target }) => {
     const { saveCards } = this.state;
     const cardTrunfo = saveCards.find((item) => (
@@ -104,7 +98,7 @@ class App extends React.Component {
     const search = target.value.length > 0
       ? saveCards.filter((item) => item.saveCardName.includes(target.value)) : saveCards;
 
-    this.setSearch(search);
+    this.setState({ search });
   }
 
   filterRare = ({ target }) => {
@@ -112,7 +106,7 @@ class App extends React.Component {
     const search = target.value !== 'todas'
       ? saveCards.filter((item) => item.saveCardRare === target.value) : saveCards;
 
-    this.setSearch(search);
+    this.setState({ search });
   }
 
   checkTrunfo = ({ target }) => {
@@ -130,6 +124,10 @@ class App extends React.Component {
     const { cardName, cardDescription, cardImage, cardRare, cardAttr1, cardAttr2,
       cardAttr3 } = this.state;
 
+    const attr1 = Number(cardAttr1);
+    const attr2 = Number(cardAttr2);
+    const attr3 = Number(cardAttr3);
+
     const max = 90;
     const totalMax = 210;
 
@@ -138,13 +136,13 @@ class App extends React.Component {
       cardDescription.length > 0,
       cardImage.length > 0,
       cardRare.length > 0,
-      Number(cardAttr1) >= 0,
-      Number(cardAttr1) <= max,
-      Number(cardAttr2) >= 0,
-      Number(cardAttr2) <= max,
-      Number(cardAttr3) >= 0,
-      Number(cardAttr3) <= max,
-      (Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr2)) <= totalMax,
+      attr1 >= 0,
+      attr1 <= max,
+      attr2 >= 0,
+      attr2 <= max,
+      attr3 >= 0,
+      attr3 <= max,
+      (attr1 + attr2 + attr3) <= totalMax,
     ];
 
     const disabled = error.every((item) => item === true);
