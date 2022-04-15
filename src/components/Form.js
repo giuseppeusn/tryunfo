@@ -20,7 +20,8 @@ class Form extends Component {
     } = this.props;
 
     return (
-      <form>
+      <form className="insert-form">
+        <h1 className="form-title">Insira uma nova carta</h1>
         <Input
           type="text"
           label="Nome"
@@ -75,9 +76,9 @@ class Form extends Component {
           func={ onInputChange }
           value={ cardImage }
         />
-        <div>
-          <label htmlFor="rare">
-            Raridade
+        <div className="rarity-trunfo">
+          <div className="rarity">
+            <label htmlFor="rare">Raridade</label>
             <select
               id="rare"
               name="cardRare"
@@ -89,27 +90,29 @@ class Form extends Component {
               <option>raro</option>
               <option>muito raro</option>
             </select>
-          </label>
+          </div>
+          {hasTrunfo ? (
+            <p className="trunfo-check">Você já tem um Super Trunfo em seu baralho</p>
+          ) : (
+            <Input
+              type="checkbox"
+              label="Super Trybe Trunfo"
+              id="trunfo"
+              name="cardTrunfo"
+              value={ cardTrunfo }
+              func={ onInputChange }
+              tag="input"
+              className="trunfo-check"
+            />
+          )}
         </div>
-        {hasTrunfo ? (
-          <p>Você já tem um Super Trunfo em seu baralho</p>
-        ) : (
-          <Input
-            type="checkbox"
-            label="Super Trybe Trunfo"
-            id="trunfo"
-            name="cardTrunfo"
-            value={ cardTrunfo }
-            func={ onInputChange }
-            tag="input"
-          />
-        )}
         {isSaveButtonDisabled ? (
           <button
             type="submit"
             data-testid="save-button"
             value={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
+            className="save-btn"
             disabled
           >
             Salvar
@@ -120,6 +123,7 @@ class Form extends Component {
             data-testid="save-button"
             value={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
+            className="save-btn"
           >
             Salvar
           </button>

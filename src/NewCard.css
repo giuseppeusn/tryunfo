@@ -1,0 +1,99 @@
+.card-insert {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 80px;
+}
+
+.new-card {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+}
+
+.insert-form {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.form-title {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: 200;
+  padding: 15px;
+  text-align: center;
+}
+
+.form-group input {
+  height: 30px;
+  width: 80%;
+}
+
+.insert-form textarea {
+  height: 50px;
+  width: 80%;
+}
+
+.rarity-trunfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.rarity {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 190px;
+}
+
+.rarity select {
+  height: 30px;
+  width: 117px;
+}
+
+.trunfo-check {
+  align-items: center;
+  display: flex;
+  height: 45px;
+  justify-content: space-around;
+  text-align: center;
+  width: 200px;
+}
+
+.trunfo-check input {
+  height: 30px;
+  width: 30px;
+}
+
+.save-btn {
+  align-self: center;
+  background-color: #036b52;
+  border: none;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  margin-top: 20px;
+  width: 50%;
+}
+
+.save-btn:hover {
+  background-color: #057a5f;
+}
+
+.save-btn:disabled {
+  background-color: #014f3d;
+  color: rgb(167, 167, 167);
+  cursor: auto;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}

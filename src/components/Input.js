@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
   render() {
-    const { type, label, id, name, tag, func, value } = this.props;
+    const { type, label, id, name, tag, func, value, className } = this.props;
 
     return (
-      <div className="x">
+      <div className={ className }>
         <label htmlFor={ id }>{label}</label>
         {tag === 'input' ? (
           <input
@@ -44,10 +44,12 @@ Input.propTypes = {
     PropTypes.string.isRequired,
     PropTypes.bool.isRequired,
   ]),
+  className: PropTypes.string,
 };
 
 Input.defaultProps = {
   value: '',
+  className: 'form-group',
 };
 
 export default Input;

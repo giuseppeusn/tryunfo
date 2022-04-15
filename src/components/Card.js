@@ -19,24 +19,36 @@ class Card extends Component {
 
     return (
       <div className="card-container">
-        <div className="card">
-          <p data-testid="name-card">{cardName}</p>
-          <img src={ cardImage } alt={ cardName } data-testid="image-card" />
-          {cardTrunfo && (
-            <div data-testid="trunfo-card">
-              <p>Super Trunfo</p>
+        <div className="card-wrapper">
+          <div className="card">
+            <p data-testid="name-card" className="card-title">{cardName}</p>
+            <div className="image-wrapper">
               <img
-                src={ superTrunfo }
-                alt="Super Trunfo"
-                className="super-trunfo"
+                src={ cardImage }
+                alt={ cardName }
+                data-testid="image-card"
+                className="image-card"
               />
+              {cardTrunfo && (
+                <div data-testid="trunfo-card" className="super-trunfo">
+                  <img src={ superTrunfo } alt="Super Trunfo" />
+                  <p>Super Trunfo</p>
+                </div>
+              )}
+              <p
+                data-testid="description-card"
+                className="desc-card"
+              >
+                {cardDescription}
+              </p>
             </div>
-          )}
-          <p data-testid="description-card">{cardDescription}</p>
-          <p data-testid="attr1-card">{cardAttr1}</p>
-          <p data-testid="attr2-card">{cardAttr2}</p>
-          <p data-testid="attr3-card">{cardAttr3}</p>
-          <p data-testid="rare-card">{cardRare}</p>
+            <div className="attributes">
+              <p data-testid="attr1-card">{cardAttr1}</p>
+              <p data-testid="attr2-card">{cardAttr2}</p>
+              <p data-testid="attr3-card">{cardAttr3}</p>
+              <p data-testid="rare-card">{cardRare}</p>
+            </div>
+          </div>
         </div>
         {isList && (
           <button

@@ -1,22 +1,29 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
-import './components/Card.css';
+import './Card.css';
+import './App.css';
+import './NewCard.css';
 import Filter from './components/Filter';
+import Header from './components/Header';
 
 class App extends React.Component {
   constructor() {
     super();
 
+    const x = `Lorem Ipsum is simply dummy text of the printing and typesetting
+    industry. Lorem Ipsum has been the industrys standard dummy
+    text ever since the 1500s.`;
+
     this.state = {
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
-      cardImage: '',
+      cardName: 'Teste',
+      cardDescription: x,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: 'https://picsum.photos/100/100',
       cardRare: 'normal',
-      cardTrunfo: false,
+      cardTrunfo: true,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       saveCards: [],
@@ -37,18 +44,8 @@ class App extends React.Component {
 
   onSaveButtonClick = (event) => {
     event.preventDefault();
-    const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      hasTrunfo,
-      saveCards,
-    } = this.state;
+    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
+      cardRare, cardTrunfo, hasTrunfo, saveCards } = this.state;
 
     const newCard = {
       saveCardName: cardName,
@@ -177,32 +174,38 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isList={ false }
-        />
+        <Header />
+        <div className="card-insert">
+          <div className="new-card">
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              hasTrunfo={ hasTrunfo }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              onInputChange={ this.onInputChange }
+              onSaveButtonClick={ this.onSaveButtonClick }
+            />
+          </div>
+          <div className="show-card">
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              isList={ false }
+            />
+          </div>
+        </div>
         <div className="cards-display">
           {saveCards.length > 0
             && search.map((item) => {
