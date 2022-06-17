@@ -1,0 +1,25 @@
+.filter {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.search-filter {
+  height: 10px;
+  padding: 10px;
+}
+
+.save-cards {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.cards-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+}

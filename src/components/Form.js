@@ -30,6 +30,7 @@ class Form extends Component {
           name="cardName"
           func={ onInputChange }
           value={ cardName }
+          limit="25"
         />
         <Input
           type="text"
@@ -39,6 +40,7 @@ class Form extends Component {
           name="cardDescription"
           func={ onInputChange }
           value={ cardDescription }
+          limit="208"
         />
         <Input
           type="number"

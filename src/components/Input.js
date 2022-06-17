@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
   render() {
-    const { type, label, id, name, tag, func, value, className } = this.props;
+    const { type, label, id, name, tag, func, value, className, limit } = this.props;
 
     return (
       <div className={ className }>
@@ -17,6 +17,7 @@ class Input extends Component {
             value={ value }
             checked={ value }
             data-testid={ `${id}-input` }
+            maxLength={ limit }
           />
         ) : (
           <textarea
@@ -26,6 +27,7 @@ class Input extends Component {
             onChange={ func }
             value={ value }
             data-testid={ `${id}-input` }
+            maxLength={ limit }
           />
         )}
       </div>
@@ -45,6 +47,7 @@ Input.propTypes = {
     PropTypes.bool.isRequired,
   ]),
   className: PropTypes.string,
+  limit: PropTypes.string.isRequired,
 };
 
 Input.defaultProps = {

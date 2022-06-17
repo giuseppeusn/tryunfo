@@ -4,6 +4,7 @@ import Form from './components/Form';
 import './Card.css';
 import './App.css';
 import './NewCard.css';
+import './Filter.css';
 import Filter from './components/Filter';
 import Header from './components/Header';
 
@@ -11,17 +12,13 @@ class App extends React.Component {
   constructor() {
     super();
 
-    const x = `Lorem Ipsum is simply dummy text of the printing and typesetting
-    industry. Lorem Ipsum has been the industrys standard dummy
-    text ever since the 1500s.`;
-
     this.state = {
-      cardName: 'Teste',
-      cardDescription: x,
+      cardName: '',
+      cardDescription: '',
       cardAttr1: '0',
       cardAttr2: '0',
       cardAttr3: '0',
-      cardImage: 'https://picsum.photos/100/100',
+      cardImage: 'https://picsum.photos/500/500',
       cardRare: 'normal',
       cardTrunfo: true,
       hasTrunfo: false,
@@ -93,7 +90,9 @@ class App extends React.Component {
   searchCard = ({ target }) => {
     const { saveCards } = this.state;
     const search = target.value.length > 0
-      ? saveCards.filter((item) => item.saveCardName.includes(target.value)) : saveCards;
+      ? saveCards.filter((item) => (
+        item.saveCardName.toLowerCase().includes(target.value.toLowerCase())))
+      : saveCards;
 
     this.setState({ search });
   }
@@ -206,41 +205,43 @@ class App extends React.Component {
             />
           </div>
         </div>
-        <div className="cards-display">
-          {saveCards.length > 0
-            && search.map((item) => {
-              const {
-                saveCardName,
-                saveCardDescription,
-                saveCardAttr1,
-                saveCardAttr2,
-                saveCardAttr3,
-                saveCardImage,
-                saveCardRare,
-                saveCardTrunfo,
-              } = item;
-              return (
-                <Card
-                  key={ saveCardName }
-                  cardName={ saveCardName }
-                  cardDescription={ saveCardDescription }
-                  cardAttr1={ saveCardAttr1 }
-                  cardAttr2={ saveCardAttr2 }
-                  cardAttr3={ saveCardAttr3 }
-                  cardImage={ saveCardImage }
-                  cardRare={ saveCardRare }
-                  cardTrunfo={ saveCardTrunfo }
-                  removeCard={ this.removeCard }
-                />
-              );
-            })}
+        <div className="save-cards">
+          <div className="cards-display">
+            {saveCards.length > 0
+              && search.map((item) => {
+                const {
+                  saveCardName,
+                  saveCardDescription,
+                  saveCardAttr1,
+                  saveCardAttr2,
+                  saveCardAttr3,
+                  saveCardImage,
+                  saveCardRare,
+                  saveCardTrunfo,
+                } = item;
+                return (
+                  <Card
+                    key={ saveCardName }
+                    cardName={ saveCardName }
+                    cardDescription={ saveCardDescription }
+                    cardAttr1={ saveCardAttr1 }
+                    cardAttr2={ saveCardAttr2 }
+                    cardAttr3={ saveCardAttr3 }
+                    cardImage={ saveCardImage }
+                    cardRare={ saveCardRare }
+                    cardTrunfo={ saveCardTrunfo }
+                    removeCard={ this.removeCard }
+                  />
+                );
+              })}
+          </div>
+          <Filter
+            search={ this.searchCard }
+            filter={ this.filterRare }
+            trunfo={ this.checkTrunfo }
+            check={ check }
+          />
         </div>
-        <Filter
-          search={ this.searchCard }
-          filter={ this.filterRare }
-          trunfo={ this.checkTrunfo }
-          check={ check }
-        />
       </div>
     );
   }

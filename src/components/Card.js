@@ -43,10 +43,19 @@ class Card extends Component {
               </p>
             </div>
             <div className="attributes">
-              <p data-testid="attr1-card">{cardAttr1}</p>
-              <p data-testid="attr2-card">{cardAttr2}</p>
-              <p data-testid="attr3-card">{cardAttr3}</p>
-              <p data-testid="rare-card">{cardRare}</p>
+              <div className="attr">
+                <p className="label">Atributo 1</p>
+                <p data-testid="attr1-card" className="value">{cardAttr1}</p>
+              </div>
+              <div className="attr">
+                <p className="label">Atributo 2</p>
+                <p data-testid="attr2-card" className="value">{cardAttr2}</p>
+              </div>
+              <div className="attr">
+                <p className="label">Atributo 3</p>
+                <p data-testid="attr3-card" className="value">{cardAttr3}</p>
+              </div>
+              <p data-testid="rare-card" data-content={cardRare} className="rare-card">{cardRare}</p>
             </div>
           </div>
         </div>
