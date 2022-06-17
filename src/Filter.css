@@ -23,3 +23,19 @@
   justify-content: center;
   width: 80%;
 }
+
+@media screen and ( max-width : 870px ) {
+
+  .filter {
+    width: 80%;
+  }
+
+  .save-cards {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .cards-display {
+    order: 1;
+  }
+}

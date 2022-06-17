@@ -99,3 +99,21 @@
   justify-content: space-between;
   padding: 10px;
 }
+
+@media screen and ( max-width : 870px ) {
+
+  .card-insert {
+    flex-direction: column;
+  }
+
+  .insert-form {
+    padding: 0;
+  }
+}
+
+@media screen and ( max-width : 470px ) {
+
+  .insert-form {
+    width: 300px;
+  }
+}
